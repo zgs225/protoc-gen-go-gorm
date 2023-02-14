@@ -15,4 +15,4 @@ example: install $(PROTOBUF_FILES)
 	protoc --go_out=. --go_opt=paths=source_relative --go-gorm_out=. --go-gorm_opt=paths=source_relative -I ./proto/ -I . $(PROTOBUF_FILES)
 
 clean:
-	find . \( -name '*.pb.go' -or -name '*.gorm.go' \) -exec rm -f {} \;
+	find . \( -name '*.pb.go' -or -name '*.gorm.go' -and -not -name 'gorm.pb.go' \) -exec rm -f {} \;

@@ -4,9 +4,8 @@ package example
 
 import (
 	sql "database/sql"
-	time "time"
-
 	pq "github.com/lib/pq"
+	time "time"
 )
 
 // 测试用结构
