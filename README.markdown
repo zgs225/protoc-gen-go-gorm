@@ -3,6 +3,12 @@ protoc-gen-go-gorm
 
 Generates GORM model from protobuf message.
 
+## Installation
+
+```
+go install github.com/zgs225/protoc-gen-go-gorm@latest
+```
+
 ## Example
 
 ``` protobuf
