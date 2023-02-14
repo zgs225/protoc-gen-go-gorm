@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package yuez.gorm.example;
+
+option go_package = "github.com/zgs225/protoc-gen-go-gorm/example";
+
+import "google/protobuf/timestamp.proto";
+
+import "proto/gorm.proto";
+
+// 测试用结构
+message Hello {
+    option (yuez.gorm.model) = {
+        table_name: "hello_table";
+    };
+
+    uint64 id = 1;
+    google.protobuf.Timestamp created_at = 2;
+    string user = 3 [(yuez.gorm.field) = {
+        column: "user_name";
+    }];
+    string logo_file = 4 [(yuez.gorm.field) = {
+        column: "logo_file2";
+        serializer: "json";
+    }];
+    google.protobuf.Timestamp updated_at = 5 [(yuez.gorm.field) = {
+        nullable_type: true;
+    }];
+    repeated string tags = 6 [(yuez.gorm.field) = {
+        type: "text[]";
+        ext_type: {
+            import_path: "github.com/lib/pq";
+            type: "StringArray";
+        };
+    }];
+}

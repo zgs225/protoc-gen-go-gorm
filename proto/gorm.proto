@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package yuez.gorm;
+
+option go_package = "github.com/zgs225/protoc-gen-go-gorm/proto";
+
+import "google/protobuf/descriptor.proto";
+
+message Model {
+    string table_name = 1;
+}
+
+enum AutoTimeUnit {
+    AutoTimeUnitNone = 0;
+    AutoTimeUnitSecond = 1;
+    AutoTimeUnitNano = 2;
+    AutoTimeUnitMilli = 3;
+}
+
+enum WritePermission {
+    WritePermissionAll = 0;
+    WritePermissionCreate = 1;
+    WritePermissionUpdate = 2;
+    WritePermissionNone = 3;
+}
+
+message ExtType {
+    string import_path = 1;
+    string type = 2;
+}
+
+message Field {
+    string column = 1;
+    string type = 2;
+    string serializer = 3;
+    int64 size = 4;
+    bool pk = 5;
+    bool unique = 6;
+    string default_value = 7;
+    int32 precision = 8;
+    int32 scale = 9;
+    bool not_null = 10;
+    bool auto_increment = 11;
+    int32 auto_increment_step = 12;
+    bool embedded = 13;
+    string embedded_prefix = 14;
+    AutoTimeUnit auto_create_time = 15;
+    AutoTimeUnit auto_update_time = 16;
+    string index = 17;
+    string uniq_index = 18;
+    string check = 19;
+    WritePermission write_perm = 20;
+    bool no_read_perm = 21;
+    string ignore = 22;
+    bool nullable_type = 23;
+    ExtType ext_type = 24;
+}
+
+extend google.protobuf.MessageOptions {
+    optional Model model = 51234;
+}
+
+extend google.protobuf.FieldOptions {
+    optional Field field = 51234;
+}
