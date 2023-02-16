@@ -20,16 +20,22 @@ func newConn() *gorm.DB {
 func TestQuery(t *testing.T) {
 	m := HelloModel{}
 	db := newConn()
-	db.First(&m, 2)
+	db.Joins("Things").First(&m, 5)
 
 	pp.Println(m)
 }
 
 func TestInsert(t *testing.T) {
 	m := HelloModel{
-		User: "Zhang San",
-		LogoFile: &LogoFile{
-			Url: "hello world",
+		User:   "Zhang San",
+		Status: Status_Normal,
+		Things: []*ThingModel{
+			{
+				Name: "牛奶",
+			},
+			{
+				Name: "咖啡",
+			},
 		},
 	}
 	db := newConn()

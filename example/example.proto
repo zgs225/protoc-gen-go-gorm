@@ -5,6 +5,7 @@ package yuez.gorm.example;
 option go_package = "github.com/zgs225/protoc-gen-go-gorm/example";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 import "proto/gorm.proto";
 
@@ -14,8 +15,14 @@ enum Status {
     Blocked = 2;
 }
 
-message LogoFile {
-    string url = 1;
+message Thing {
+    option (yuez.gorm.model) = {
+        table_name: "things";
+    };
+
+    uint64 id = 1;
+    string name = 2;
+    uint64 hello_id = 3;
 }
 
 // 测试用结构
@@ -29,7 +36,7 @@ message Hello {
     string user = 3 [(yuez.gorm.field) = {
         column: "user_name";
     }];
-    LogoFile logo_file = 4 [(yuez.gorm.field) = {
+    google.protobuf.Struct logo_file = 4 [(yuez.gorm.field) = {
         column: "logo_file2";
         serializer: "json";
     }];
@@ -44,4 +51,7 @@ message Hello {
         };
     }];
     Status status = 7;
+    repeated Thing things = 8 [(yuez.gorm.field) = {
+        foreign_key: "HelloId";
+    }];
 }

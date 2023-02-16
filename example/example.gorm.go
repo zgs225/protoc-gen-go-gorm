@@ -4,20 +4,32 @@ package example
 
 import (
 	sql "database/sql"
+	_struct "github.com/golang/protobuf/ptypes/struct"
 	pq "github.com/lib/pq"
 	time "time"
 )
+
+type ThingModel struct {
+	Id      uint64
+	Name    string
+	HelloId uint64
+}
+
+func (m ThingModel) TableName() string {
+	return "things"
+}
 
 // 测试用结构
 
 type HelloModel struct {
 	Id        uint64
 	CreatedAt time.Time
-	User      string    `gorm:"column:user_name"`
-	LogoFile  *LogoFile `gorm:"column:logo_file2;serializer:json"`
+	User      string          `gorm:"column:user_name"`
+	LogoFile  *_struct.Struct `gorm:"column:logo_file2;serializer:json"`
 	UpdatedAt sql.NullTime
 	Tags      pq.StringArray `gorm:"type:text[]"`
 	Status    Status
+	Things    []*ThingModel `gorm:"foreignKey:HelloId"`
 }
 
 func (m HelloModel) TableName() string {

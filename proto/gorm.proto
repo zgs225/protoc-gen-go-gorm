@@ -54,6 +54,15 @@ message Field {
     string ignore = 22;
     bool nullable_type = 23;
     ExtType ext_type = 24;
+    string constraint = 25;
+
+    string foreign_key = 26;
+    string references = 27;
+    string polymorphic = 28;
+    string polymorphic_value = 29;
+    string many2many = 30;
+    string join_foreign_key = 31;
+    string join_references = 32;
 }
 
 extend google.protobuf.MessageOptions {

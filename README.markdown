@@ -9,6 +9,12 @@ Generates GORM model from protobuf message.
 go install github.com/zgs225/protoc-gen-go-gorm@latest
 ```
 
+## Features
+
+* Support all field tags for model declaration
+* Support all types of association
+* Support enumeration
+
 ## Example
 
 ``` protobuf

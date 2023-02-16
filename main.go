@@ -195,6 +195,38 @@ func gormFieldTag(f *protogen.Field) string {
 		parts = append(parts, ext.GetIgnore())
 	}
 
+	if len(ext.GetForeignKey()) > 0 {
+		parts = append(parts, "foreignKey:"+ext.GetForeignKey())
+	}
+
+	if len(ext.GetReferences()) > 0 {
+		parts = append(parts, "references:"+ext.GetReferences())
+	}
+
+	if len(ext.GetPolymorphic()) > 0 {
+		parts = append(parts, "polymorphic:"+ext.GetPolymorphic())
+	}
+
+	if len(ext.GetPolymorphicValue()) > 0 {
+		parts = append(parts, "polymorphicValue:"+ext.GetPolymorphicValue())
+	}
+
+	if len(ext.GetConstraint()) > 0 {
+		parts = append(parts, "constraint:"+ext.GetConstraint())
+	}
+
+	if len(ext.GetMany2Many()) > 0 {
+		parts = append(parts, "many2many:"+ext.GetMany2Many())
+	}
+
+	if len(ext.GetJoinForeignKey()) > 0 {
+		parts = append(parts, "joinForeignKey:"+ext.GetJoinForeignKey())
+	}
+
+	if len(ext.GetJoinReferences()) > 0 {
+		parts = append(parts, "joinReferences:"+ext.GetJoinReferences())
+	}
+
 	if len(parts) == 0 {
 		return ""
 	}
@@ -280,6 +312,12 @@ func fieldGoType(g *protogen.GeneratedFile, f *protogen.Field) (string, bool) {
 			} else {
 				goType = g.QualifiedGoIdent(timePackage.Ident("Time"))
 			}
+		} else if f.Message.Desc.Options().ProtoReflect().Has(proto.E_Model.TypeDescriptor()) {
+			ident := protogen.GoIdent{
+				GoName:       modelName(f.Message),
+				GoImportPath: f.Message.GoIdent.GoImportPath,
+			}
+			goType = "*" + g.QualifiedGoIdent(ident)
 		} else {
 			goType = "*" + g.QualifiedGoIdent(f.Message.GoIdent)
 		}
