@@ -13,8 +13,8 @@ import (
 type HelloModel struct {
 	Id        uint64
 	CreatedAt time.Time
-	User      string `gorm:"column:user_name"`
-	LogoFile  string `gorm:"column:logo_file2;serializer:json"`
+	User      string    `gorm:"column:user_name"`
+	LogoFile  *LogoFile `gorm:"column:logo_file2;serializer:json"`
 	UpdatedAt sql.NullTime
 	Tags      pq.StringArray `gorm:"type:text[]"`
 	Status    Status

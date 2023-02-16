@@ -14,6 +14,10 @@ enum Status {
     Blocked = 2;
 }
 
+message LogoFile {
+    string url = 1;
+}
+
 // 测试用结构
 message Hello {
     option (yuez.gorm.model) = {
@@ -25,7 +29,7 @@ message Hello {
     string user = 3 [(yuez.gorm.field) = {
         column: "user_name";
     }];
-    string logo_file = 4 [(yuez.gorm.field) = {
+    LogoFile logo_file = 4 [(yuez.gorm.field) = {
         column: "logo_file2";
         serializer: "json";
     }];
