@@ -17,6 +17,7 @@ type HelloModel struct {
 	LogoFile  string `gorm:"column:logo_file2;serializer:json"`
 	UpdatedAt sql.NullTime
 	Tags      pq.StringArray `gorm:"type:text[]"`
+	Status    Status
 }
 
 func (m HelloModel) TableName() string {

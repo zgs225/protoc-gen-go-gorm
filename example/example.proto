@@ -8,6 +8,12 @@ import "google/protobuf/timestamp.proto";
 
 import "proto/gorm.proto";
 
+enum Status {
+    Invalid = 0;
+    Normal = 1;
+    Blocked = 2;
+}
+
 // 测试用结构
 message Hello {
     option (yuez.gorm.model) = {
@@ -33,4 +39,5 @@ message Hello {
             type: "StringArray";
         };
     }];
+    Status status = 7;
 }
